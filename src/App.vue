@@ -45,7 +45,7 @@ const decrementarCantidad = (id) => {
 
 <template>
   <Header :carrito="carrito" :guitarraPromo="guitarraPromo" @incrementar-cantidad="incrementarCantidad"
-    @decrementar-cantidad="decrementarCantidad" />
+    @agregar-carrito="agregarCarrito" @decrementar-cantidad="decrementarCantidad" />
 
   <main class="container-xl mt-5">
     <h2 class="text-center">Nuestra Colección</h2>

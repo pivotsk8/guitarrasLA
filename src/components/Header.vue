@@ -1,6 +1,7 @@
 <script setup>
 import TableCard from './TableCard.vue';
 import PromoGuitar from './PromoGuitar.vue';
+import { computed } from 'vue'
 
 const props = defineProps({
     carrito: {
@@ -15,8 +16,17 @@ const props = defineProps({
 
 defineEmits([
     'decrementar-cantidad',
-    'incrementar-cantidad'
+    'incrementar-cantidad',
+    'agregar-carrito'
 ])
+
+const totalPagar = computed(() => {
+    return props.carrito.reduce(
+        (total, producto) => total + (
+            producto.cantidad * producto.precio
+        ), 0
+    )
+})
 </script>
 
 <template>
@@ -56,14 +66,14 @@ defineEmits([
                                     </tbody>
                                 </table>
 
-                                <p class="text-end">Total pagar: <span class="fw-bold">$899</span></p>
+                                <p class="text-end">Total pagar: <span class="fw-bold">${{ totalPagar }}</span></p>
                                 <button class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div><!--.row-->
-            <PromoGuitar :guitarraPromo="guitarraPromo" />
+            <PromoGuitar :guitarraPromo="guitarraPromo" @agregar-carrito="$emit('agregar-carrito', $event)" />
         </div>
 
         <img class="header-guitarra" src="/img/header_guitarra.png" alt="imagen header">
