@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { db } from './data/guitarras'
 import GuitarraCard from './components/GuitarraCard.vue';
 import Header from './components/Header.vue';
@@ -13,6 +13,9 @@ const guitarraPromo = ref({})
 // const state = reactive({
 //   guitarras: []
 // })
+watch(carrito, () => {
+  guardarLocalStorage()
+}, { deep: true })
 
 onMounted(() => {
   // 👉 con ref
@@ -27,6 +30,7 @@ onMounted(() => {
   // 👉 con reactive
   // state.guitarras = db
 })
+
 const guardarLocalStorage = () => {
   // ⚠️ no se pueden almacenar arrays en el localStorage tiene que ser un JSON
   localStorage.setItem('carrito', JSON.stringify(carrito.value))
@@ -38,30 +42,25 @@ const agregarCarrito = (guitarra) => {
     ? carrito.value[productInCart].cantidad++
     : (guitarra.cantidad = 1,
       carrito.value.push(guitarra));
-  guardarLocalStorage()
 }
 
 const incrementarCantidad = (id) => {
   const index = carrito.value.findIndex(producto => producto.id === id)
   carrito.value[index].cantidad++
-  guardarLocalStorage()
 }
 
 const decrementarCantidad = (id) => {
   const index = carrito.value.findIndex(producto => producto.id === id)
   if (carrito.value[index].cantidad <= 1) return
   carrito.value[index].cantidad--
-  guardarLocalStorage()
 }
 
 const eliminarProducto = (id) => {
   carrito.value = carrito.value.filter(producto => producto.id !== id)
-  guardarLocalStorage()
 }
 
 const vaciarCarrito = () => {
   carrito.value = []
-  guardarLocalStorage()
 }
 </script>
 
