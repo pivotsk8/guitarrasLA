@@ -73,7 +73,8 @@ const vaciarCarrito = () => {
     <h2 class="text-center">Nuestra Colección</h2>
 
     <div class="row mt-5">
-      <GuitarraCard v-for="guitarra in guitarras" :guitarra="guitarra" @agregar-carrito="agregarCarrito" />
+      <GuitarraCard v-for="guitarra in guitarras" :key="guitarra.id" :guitarra="guitarra"
+        @agregar-carrito="agregarCarrito" />
     </div>
   </main>
   <Footer />

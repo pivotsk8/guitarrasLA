@@ -61,7 +61,7 @@ const totalPagar = computed(() => {
                                     </thead>
                                     <tbody>
                                         <tr v-for="producto in  carrito ">
-                                            <TableCard :producto="producto"
+                                            <TableCard :producto="producto" :key="producto.id"
                                                 @incrementar-cantidad="$emit('incrementarCantidad', $event)"
                                                 @decrementar-cantidad="$emit('decrementarCantidad', $event)"
                                                 @eliminar-producto="$emit('eliminarProducto', $event)" />
