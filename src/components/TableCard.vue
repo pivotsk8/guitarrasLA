@@ -8,7 +8,8 @@ defineProps({
 
 defineEmits([
     'decrementar-cantidad',
-    'incrementar-cantidad'
+    'incrementar-cantidad',
+    'eliminar-producto'
 ])
 </script>
 <template>
@@ -31,7 +32,7 @@ defineEmits([
         </button>
     </td>
     <td>
-        <button class="btn btn-danger" type="button">
+        <button class="btn btn-danger" type="button" @click="$emit('eliminar-producto', producto.id)">
             X
         </button>
     </td>

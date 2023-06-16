@@ -7,7 +7,7 @@ const props = defineProps({
     }
 })
 
-defineEmits(['agregar-carrito '])
+defineEmits(['agregar-carrito'])
 
 </script>
 <template>

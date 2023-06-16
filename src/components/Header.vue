@@ -17,7 +17,9 @@ const props = defineProps({
 defineEmits([
     'decrementar-cantidad',
     'incrementar-cantidad',
-    'agregar-carrito'
+    'agregar-carrito',
+    'eliminar-producto',
+    'vaciar-carrito'
 ])
 
 const totalPagar = computed(() => {
@@ -61,13 +63,15 @@ const totalPagar = computed(() => {
                                         <tr v-for="producto in  carrito ">
                                             <TableCard :producto="producto"
                                                 @incrementar-cantidad="$emit('incrementarCantidad', $event)"
-                                                @decrementar-cantidad="$emit('decrementarCantidad', $event)" />
+                                                @decrementar-cantidad="$emit('decrementarCantidad', $event)"
+                                                @eliminar-producto="$emit('eliminarProducto', $event)" />
                                         </tr>
                                     </tbody>
                                 </table>
 
                                 <p class="text-end">Total pagar: <span class="fw-bold">${{ totalPagar }}</span></p>
-                                <button class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                                <button @click="$emit('vaciar-carrito')" class="btn btn-dark w-100 mt-3 p-2">Vaciar
+                                    Carrito</button>
                             </div>
                         </div>
                     </div>
